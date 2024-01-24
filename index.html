@@ -32,7 +32,19 @@
   <link rel="preload" as="image" href="./assets/images/hero-banner.png" media="min-width(768px)">
   <link rel="preload" as="image" href="./assets/images/hero-banner-bg.png" media="min-width(768px)">
   <link rel="preload" as="image" href="./assets/images/hero-bg.jpg">
-
+  <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+<script>
+  window.OneSignalDeferred = window.OneSignalDeferred || [];
+  OneSignalDeferred.push(function(OneSignal) {
+    OneSignal.init({
+      appId: "45f83c34-6dd2-47f7-9a81-ae6d94e03fe9",
+      safari_web_id: "web.onesignal.auto.15df0189-2d21-4404-bd16-e27bc91473d8",
+      notifyButton: {
+        enable: true,
+      },
+    });
+  });
+</script>
 </head>
 
 <body id="top">
