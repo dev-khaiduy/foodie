@@ -20,12 +20,9 @@
     OneSignal.init({
       appId: "45f83c34-6dd2-47f7-9a81-ae6d94e03fe9",
     });
+    OneSignal.setExternalUserId(123456789);
   });
-  let externalUserId = "123456789"; // You will supply the external user id to the OneSignal SDK
 
-OneSignal.push(function() {
-  OneSignal.setExternalUserId(externalUserId);
-});
 </script>
   
   
