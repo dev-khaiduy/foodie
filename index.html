@@ -20,7 +20,7 @@
     OneSignal.init({
       appId: "184c9c2b-ffb0-461e-8e34-fc37030f9cc8",
     });
-    OneSignal.setExternalUserId(034501101);
+    OneSignal.login("0345501101");
   });
 
 </script>
@@ -152,7 +152,8 @@
 
             <p class="hero-text">Food is any substance consumed to provide nutritional support for an organism.</p>
 
-            <button class="btn">Book A Table</button>
+            <button class="btn" onclick="addTagsUponCartUpdate(productName, productImageURL)">Add to cart</button>
+            <button class="btn" onclick="removeCartTags()">Remove from cart / Purchase </button>
 
           </div>
 
@@ -1317,6 +1318,44 @@
     - custom js link
   -->
   <script src="./assets/js/script.js" defer></script>
+  <script>
+    // Ensure this code runs after the OneSignal SDK is loaded and initialized
+    let productName = "Name of the Product"; // Replace with the actual product name
+    let productImageURL = "https://yoursiteurl.com/image-file.jpg"; // Replace with the actual image URL
+  
+    async function addTagsUponCartUpdate(productName, productImageURL) {
+      await OneSignalDeferred.push(async function (OneSignal) {
+        let timestamp = Math.floor(Date.now() / 1000);
+        await OneSignal.User.addTags({
+          cart_update: timestamp,
+          product_name: productName,
+          product_image: productImageURL,
+        });
+        // Optionally call getTags after adding tags
+        const tags = await OneSignal.User.getTags();
+        console.log(tags);
+      });
+    }
+  </script>
+  <script>
+    // Include the addTagsUponCartUpdate function here as previously described
+  
+    // Function to remove cart tags
+    async function removeCartTags() {
+      await OneSignalDeferred.push(async function (OneSignal) {
+        let timestamp = Math.floor(Date.now() / 1000);
+        await OneSignal.User.addTags({
+          cart_update: "",
+          product_name: "",
+          product_image: "",
+        });
+        // Optionally call getTags after removing tags
+        const tags = await OneSignal.User.getTags();
+        console.log(tags);
+      });
+    }
+  </script>
+  
 
   <!-- 
     - ionicon link
